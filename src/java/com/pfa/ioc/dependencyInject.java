@@ -37,6 +37,7 @@ public enum dependencyInject {
     }
 
 //    for testing    
+    
 //    public static void main(String[] args) throws Exception {
 //        dependencyInject.instance.getDao().add(new User());
 //    }

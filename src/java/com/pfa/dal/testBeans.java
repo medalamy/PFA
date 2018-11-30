@@ -26,14 +26,14 @@ public class testBeans {
         //User u = new User();
         //dao.add(u);
         //--
-//        User u2 = new User();
-//        u2 = dao.findById(User.class, 3);
-//        u2.setUserName("login");
-//        dao.update(u2);
+        User u2 = new User();
+        u2 = dao.findById(User.class, 30);
+        u2.setUserName("login");
+        dao.update(u2);
         //--
-//        User u3 = new User();
-//        u3.setId(5);
-//        dao.delete(u3);
+        User u3 = new User();
+        u3.setId(5);
+        dao.delete(u3);
         //--
 //        List users = new ArrayList<>();
 //        users = dao.getAll(User.class);

@@ -37,6 +37,8 @@ public class User implements Serializable {
     private String phone;
     @Column(unique = true)
     private String email;
+    //@Column(name = "is_activaed")
+    //private boolean isActivated;
 
     @OneToMany(mappedBy = "user")
     private List<UserRoles> userRoles;
@@ -119,10 +121,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "Id=" + Id + ", userName=" + userName + ", pass=" + pass + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + ", email=" + email + ", userRoles=" + userRoles + '}'+"\n";
+        return "User{" + "Id=" + Id + ", userName=" + userName + ", pass=" + pass + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + ", email=" + email + ", userRoles=" + userRoles + '}' + "\n";
     }
-
-    
-    
 
 }

@@ -41,6 +41,13 @@ public class GenericDaoJpaImpl<T> implements IGenericDao<T> {
         commitAndClose();
         return (T) o;
     }
+        @Override
+        public T findByUsername(Class c, String u) {
+        openTrx();
+        Query q = em.createQuery("select object(o) from " + c.getName() + " as o where o.username="+u);
+        List l = q.getResultList();
+        return (T) l.get(0);
+    }
 
     @Override
     public void update(T o) {
@@ -53,7 +60,17 @@ public class GenericDaoJpaImpl<T> implements IGenericDao<T> {
     @Override
     public void delete(T o) {
         openTrx();
-        em.remove(em.contains(o) ? o : em.merge(o)); //?
+        em.remove(o); //? em.contains(o) ? o : em.merge(o)
+        commitAndClose();
+    }
+    
+    @Override
+    public void delete(T o,int id) {
+        openTrx();
+       
+        Object o1 = em.find(o.getClass(),id);
+        
+        em.remove(o1); //? em.contains(o) ? o : em.merge(o)
         commitAndClose();
     }
 
