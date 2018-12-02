@@ -16,8 +16,9 @@
 
                 <f:facet name = "header">
                     <h:outputText value = "Modification de compte"/>
-                </f:facet>
+                    <h:inputHidden value="#{User.user.id}"></h:inputHidden>
 
+                </f:facet>
                 <h:outputLabel for="username">Login</h:outputLabel>
                 <h:inputText value="#{User.user.userName}" ></h:inputText>
 
@@ -48,8 +49,7 @@
             <h:panelGrid id = "panel2" columns = "2" border = "1"
                          cellpadding = "2" cellspacing = "2">
 
-                <h:link value="Liste des utilisateurs" outcome="list"></h:link>
-                <h:link ></h:link>
+                
 
 
 

@@ -21,7 +21,7 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class UserManagedBean {
 
-    private User user;
+    private User user, u;
     private List<User> users = new ArrayList<>();
     private final IGenericDao<User> dao;
 
@@ -53,31 +53,36 @@ public class UserManagedBean {
     public String save() {
         System.out.println(user);
         dao.add(user);
+        users = dao.getAll(User.class);
         return "index";
     }
 
     public String delete(User u) {
         System.out.print(u);
-        dao.delete(u,u.getId());
-        return "list";
+        dao.delete(u, u.getId());
+        users = dao.getAll(User.class);
+        return "index";
     }
 
     public String update(User u) {
+        System.out.println(u);
         this.user = u;
         return "update";
     }
 
     public String doUpdate() {
+        System.out.println(user);
         dao.update(user);
-        return "list";
+        return "index";
     }
 
     public String login() {
-        if (dao.findByUsername(User.class, user.getUserName()) != null) {
+        User u1 = dao.findByKeyword(User.class, "userName", user.getUserName());
+        if ((u1) != null) {
             return "index";
-        }
-        else
+        } else {
             return "login";
+        }
 
     }
 

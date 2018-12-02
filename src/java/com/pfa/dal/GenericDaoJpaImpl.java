@@ -18,76 +18,79 @@ import javax.persistence.Query;
  */
 public class GenericDaoJpaImpl<T> implements IGenericDao<T> {
 
-    private EntityManagerFactory emf;
-    private EntityManager em;
-    private EntityTransaction et;
+    private final EntityManagerFactory emf;
+    private final EntityManager em;
+    private final EntityTransaction et;
 
     public GenericDaoJpaImpl() {
         emf = Persistence.createEntityManagerFactory("PFAPU");
         em = emf.createEntityManager();
+        et = em.getTransaction();
     }
 
     @Override
     public void add(T o) {
-        openTrx();
+        et.begin();
         em.persist(o);
-        commitAndClose();
+        et.commit();
     }
 
     @Override
     public T findById(Class c, int id) {
-        openTrx();
+        et.begin();
         Object o = (T) em.find(c, id);
-        commitAndClose();
+        et.commit();
         return (T) o;
     }
-        @Override
-        public T findByUsername(Class c, String u) {
-        openTrx();
-        Query q = em.createQuery("select object(o) from " + c.getName() + " as o where o.username="+u);
+
+    @Override
+    public T findByKeyword(Class c, String param, String value) {
+        et.begin();
+        Query q = em.createQuery("select o from " + c.getName() + " as o where o." + param + " LIKE '" + value + "'");
+//        q.setParameter("class", c.getName());
+//        q.setParameter("param", param);
+//        q.setParameter("val", value);
         List l = q.getResultList();
-        return (T) l.get(0);
+        try {
+            return (T) q.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public void update(T o) {
-        openTrx();
+        et.begin();
         em.merge(o);
-        commitAndClose();
+        et.commit();
+    }
 
+    public void update(T o, int id) {
+        et.begin();
+        
+        
+        et.commit();
     }
 
     @Override
     public void delete(T o) {
-        openTrx();
-        em.remove(o); //? em.contains(o) ? o : em.merge(o)
-        commitAndClose();
+        et.begin();
+        em.remove(em.contains(o) ? o : em.merge(o));
+        et.commit();
     }
-    
+
     @Override
-    public void delete(T o,int id) {
-        openTrx();
-       
-        Object o1 = em.find(o.getClass(),id);
-        
-        em.remove(o1); //? em.contains(o) ? o : em.merge(o)
-        commitAndClose();
+    public void delete(T o, int id) {
+        et.begin();
+        Object f = em.find(o.getClass(), id);
+        em.remove(f);
+        et.commit();
     }
 
     @Override
     public List<T> getAll(Class c) {
-        Query q = em.createQuery("select object(o) from " + c.getName() + " as o");
+        Query q = em.createQuery("select o from " + c.getName() + " as o");
         return q.getResultList();
-    }
-
-    private void openTrx() {
-        et = em.getTransaction();
-        et.begin();
-    }
-
-    private void commitAndClose() {
-        et.commit();
-        //em.close();
     }
 
 }

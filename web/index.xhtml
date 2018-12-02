@@ -4,58 +4,55 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      >
     <h:head>
+        <h:outputStylesheet library = "css" name = "style.css" /> 
+
     </h:head>
     <h:body style="text-align: center;">
-        <h1>&nbsp;</h1>
         <h:form  style="display: inline-block;">
+            <h:dataTable value = "#{User.users}" var = "u"
+                         styleClass = "employeeTable"
+                         headerClass = "employeeTableHeader"
+                         rowClasses = "employeeTableOddRow,employeeTableEvenRow">
 
-            <h:panelGrid id = "panel" columns = "2" border = "2"
-                         cellpadding = "10" cellspacing = "2">
+                <h:column>    				
+                    <f:facet name = "header">Nom d'utilisateur</f:facet>    				
+                        #{u.userName}
+                </h:column>
 
-                <f:facet name = "header">
-                    <h:outputText value = "Creation de compte"/>
-                </f:facet>
+                <h:column>
+                    <f:facet name = "header">Nom</f:facet>
+                        #{u.lName}
+                </h:column>
 
-                <h:outputLabel for="username">Nom d'utilisateur</h:outputLabel>
-                <h:inputText value="#{User.user.userName}" ></h:inputText>
+                <h:column>
+                    <f:facet name = "header">Prénom</f:facet>
+                        #{u.fName}
+                </h:column>
 
-                <h:outputLabel for="pass">mot de passe</h:outputLabel>
-                <h:inputSecret value="#{User.user.pass}" ></h:inputSecret>
+                <h:column>
+                    <f:facet name = "header">Téléphone</f:facet>
+                        #{u.phone}
+                </h:column>
 
-                <h:outputLabel for="fName">Prénom</h:outputLabel>
-                <h:inputText value="#{User.user.fName}" ></h:inputText>
-
-                <h:outputLabel for="lName">Nom</h:outputLabel>
-                <h:inputText value="#{User.user.lName}" ></h:inputText>
-
-                <h:outputLabel for="phone">Téléphone</h:outputLabel>
-                <h:inputText value="#{User.user.phone}" ></h:inputText>
-
-                <h:outputLabel for="email">email</h:outputLabel>
-                <h:inputText value="#{User.user.email}" ></h:inputText>
-
-                <f:facet name = "footer">
-                    <h:panelGroup style = "display:block; text-align:center">
-                        <h:commandButton value="Enregistrer" action="#{User.save()}"/>
-                    </h:panelGroup>
-                </f:facet>
-
-
-            </h:panelGrid>
-
-            <h:panelGrid id = "panel2" columns = "2" border = "1"
-                         cellpadding = "2" cellspacing = "2">
-
-                <h:link value="Liste des utilisateurs" outcome="list"></h:link>
-                <h:link ></h:link>
-
-
-
-            </h:panelGrid>
+                <h:column>
+                    <f:facet name = "header">Email</f:facet>
+                        #{u.email}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header"></f:facet>
+                    <h:commandButton value="Supprimer" action="#{User.delete(u)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header"></f:facet>
+                    <h:commandButton value="Modifier" action="#{User.update(u)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:link value="Créer un utilisateur" outcome="create"></h:link>
 
         </h:form>
     </h:body>
 </html>
+
 
