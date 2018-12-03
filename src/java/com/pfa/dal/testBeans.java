@@ -32,8 +32,8 @@ public class testBeans {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PFAPU"); //suffisant pour créer les tableaux dans la base
 
         
-        GenericDaoJpaImpl<User> dao = new GenericDaoJpaImpl<>();
-        GenericDaoJpaImpl<Region> dao2 = new GenericDaoJpaImpl<>();
+//        GenericDaoJpaImpl<User> dao = new GenericDaoJpaImpl<>();
+//        GenericDaoJpaImpl<Region> dao2 = new GenericDaoJpaImpl<>();
         
 //        //--
 //        Region r2 = new Region();

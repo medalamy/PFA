@@ -66,10 +66,8 @@ public class GenericDaoJpaImpl<T> implements IGenericDao<T> {
     }
 
     public void update(T o, int id) {
-        et.begin();
-        
-        
-        et.commit();
+//        et.begin();
+//        et.commit();
     }
 
     @Override

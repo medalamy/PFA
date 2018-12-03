@@ -4,7 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      >
     <h:head>
     </h:head>
     <h:body style="text-align: center;">
@@ -36,6 +36,12 @@
                 <h:outputLabel for="email">email</h:outputLabel>
                 <h:inputText value="#{User.user.email}" ></h:inputText>
 
+                <h:outputLabel for="region">region</h:outputLabel>
+                <h:selectOneMenu value="#{User.str}">
+                    <f:selectItems value="#{User.regions}" var="re"
+                                   itemLabel="#{re.name}" itemValue="#{re.id}" />
+                </h:selectOneMenu>
+
                 <f:facet name = "footer">
                     <h:panelGroup style = "display:block; text-align:center">
                         <h:commandButton value="Enregistrer" action="#{User.save()}"/>
@@ -45,15 +51,6 @@
 
             </h:panelGrid>
 
-            <h:panelGrid id = "panel2" columns = "2" border = "1"
-                         cellpadding = "2" cellspacing = "2">
-
-                <h:link value="Liste des utilisateurs" outcome="list"></h:link>
-                <h:link ></h:link>
-
-
-
-            </h:panelGrid>
 
         </h:form>
     </h:body>

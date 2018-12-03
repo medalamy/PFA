@@ -5,6 +5,7 @@
  */
 package com.pfa.managedBeans;
 
+import com.pfa.beans.Region;
 import com.pfa.beans.User;
 import com.pfa.dal.IGenericDao;
 import com.pfa.ioc.dependencyInject;
@@ -24,6 +25,11 @@ public class UserManagedBean {
     private User user, u;
     private List<User> users = new ArrayList<>();
     private final IGenericDao<User> dao;
+    private String str;
+    
+    private Region reg;
+    private List<Region> regions;
+    private final IGenericDao<Region> daoR;
 
     /**
      * Creates a new instance of addUser
@@ -32,6 +38,8 @@ public class UserManagedBean {
         dao = dependencyInject.instance.getDao();
         user = new User();
         users = dao.getAll(User.class);
+        daoR = dependencyInject.instance.getDao();
+        regions = daoR.getAll(Region.class);
     }
 
     public User getUser() {
@@ -46,12 +54,47 @@ public class UserManagedBean {
         return users;
     }
 
+    
+
+    public List<Region> getRegions() {
+        return regions;
+    }
+
+    public void setRegions(List<Region> regions) {
+        this.regions = regions;
+    }
+    
+    
+
     public void setUsers(List<User> users) {
         this.users = users;
     }
 
+    public Region getReg() {
+        return reg;
+    }
+
+    public void setReg(Region reg) {
+        this.reg = reg;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+    
+    
+    
+    
+
     public String save() {
+        System.out.println("com.pfa.managedBeans.UserManagedBean.save()");
         System.out.println(user);
+        System.out.println(str);
+        user.setRegion(daoR.findById(Region.class, Integer.parseInt(str)));
         dao.add(user);
         users = dao.getAll(User.class);
         return "index";

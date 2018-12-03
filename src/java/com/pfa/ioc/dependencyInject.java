@@ -23,7 +23,7 @@ public enum dependencyInject {
     private dependencyInject() {
     }
 
-    public IGenericDao<User> getDao() {
+    public IGenericDao getDao() {
         //idao = new GenericDaoJpaImpl(); //change dependency here
         //idao = (IGenericDao) IGenericDao.class.getClassLoader().loadClass(ConfigReader.getConfigClassName()).newInstance(); working too
         
