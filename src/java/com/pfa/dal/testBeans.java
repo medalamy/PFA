@@ -28,7 +28,7 @@ public class testBeans {
     }
 
     public static void main(String[] args) throws Exception {
-        //createDB("hib");
+            //createDB("hib");
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PFAPU"); //suffisant pour créer les tableaux dans la base
 
         

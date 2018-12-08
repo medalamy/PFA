@@ -30,6 +30,10 @@ public class UserManagedBean {
     private Region reg;
     private List<Region> regions;
     private final IGenericDao<Region> daoR;
+    
+    private List<String> roles;
+        private String str2;
+
 
     /**
      * Creates a new instance of addUser
@@ -40,6 +44,10 @@ public class UserManagedBean {
         users = dao.getAll(User.class);
         daoR = dependencyInject.instance.getDao();
         regions = daoR.getAll(Region.class);
+        roles = new ArrayList<>();
+        roles.clear();
+        roles.add("Recenseur");
+        roles.add("Admin Région");
     }
 
     public User getUser() {
@@ -85,6 +93,22 @@ public class UserManagedBean {
     public void setStr(String str) {
         this.str = str;
     }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
+    public String getStr2() {
+        return str2;
+    }
+
+    public void setStr2(String str2) {
+        this.str2 = str2;
+    }
     
     
     
@@ -94,6 +118,7 @@ public class UserManagedBean {
         System.out.println("com.pfa.managedBeans.UserManagedBean.save()");
         System.out.println(user);
         System.out.println(str);
+        user.setRole(str2);
         user.setRegion(daoR.findById(Region.class, Integer.parseInt(str)));
         dao.add(user);
         users = dao.getAll(User.class);

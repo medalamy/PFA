@@ -41,6 +41,13 @@
                     <f:selectItems value="#{User.regions}" var="re"
                                    itemLabel="#{re.name}" itemValue="#{re.id}" />
                 </h:selectOneMenu>
+                
+                                <h:outputLabel for="role">region</h:outputLabel>
+                <h:selectOneMenu value="#{User.str2}">
+                    <f:selectItems value="#{User.roles}" var="r"
+                                   itemLabel="#{r}" itemValue="#{r}" />
+                </h:selectOneMenu>
+                
 
                 <f:facet name = "footer">
                     <h:panelGroup style = "display:block; text-align:center">
