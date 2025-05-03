@@ -18,10 +18,16 @@ public interface IGenericDao<T> {
 
     public T findById(Class c, int id); //read
 
+    public T findByKeyword(Class c, String param, String value);
+
     public void update(T o);
 
+    public void update(T o, int id);
+
     public void delete(T o);
-    
+
+    public void delete(T o, int id);
+
     public List<T> getAll(Class c);
 
 }

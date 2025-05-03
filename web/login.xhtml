@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      >
+    <h:head>
+    </h:head>
+    <h:body style="text-align: center;">
+        <h1>&nbsp;</h1>
+        <h:form  style="display: inline-block;">
+
+            <h:panelGrid id = "panel" columns = "2" border = "2"
+                         cellpadding = "10" cellspacing = "2">
+
+                <f:facet name = "header">
+                    <h:outputText value = "Authentification"/>
+                </f:facet>
+
+                <h:outputLabel for="username">Login</h:outputLabel>
+                <h:inputText value="#{User.user.userName}" ></h:inputText>
+
+                <h:outputLabel for="pass">mot de passe</h:outputLabel>
+                <h:inputSecret value="#{User.user.pass}" ></h:inputSecret>
+
+               
+                <f:facet name = "footer">
+                    <h:panelGroup style = "display:block; text-align:center">
+                        <h:commandButton value="S'authentifier" action="#{User.login()}"/>
+                    </h:panelGroup>
+                </f:facet>
+
+
+            </h:panelGrid>
+
+ 
+
+        </h:form>
+        
+    </h:body>
+</html>
+

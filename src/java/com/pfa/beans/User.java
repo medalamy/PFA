@@ -6,13 +6,12 @@
 package com.pfa.beans;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -33,13 +32,18 @@ public class User implements Serializable {
     private String fName; //prenom
     @Column(name = "last_name")
     private String lName; //nom
-    @Column(unique = true)
+    //@Column(unique = true)
     private String phone;
-    @Column(unique = true)
+    //@Column(unique = true)
     private String email;
+    @Column(name = "is_activaed")
+    private boolean isActivated;
+    private String role;
+    
+    @ManyToOne
+    private Region region;
 
-    @OneToMany(mappedBy = "user")
-    private List<UserRoles> userRoles;
+
 
     public User() {
     }
@@ -109,20 +113,39 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public List<UserRoles> getUserRoles() {
-        return userRoles;
+    public boolean isIsActivated() {
+        return isActivated;
     }
 
-    public void setUserRoles(List<UserRoles> userRoles) {
-        this.userRoles = userRoles;
+    public void setIsActivated(boolean isActivated) {
+        this.isActivated = isActivated;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
     }
 
     @Override
     public String toString() {
-        return "User{" + "Id=" + Id + ", userName=" + userName + ", pass=" + pass + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + ", email=" + email + ", userRoles=" + userRoles + '}'+"\n";
+        return "User{" + "Id=" + Id + ", userName=" + userName + ", pass=" + pass + ", fName=" + fName + ", lName=" + lName + ", phone=" + phone + ", email=" + email + ", isActivated=" + isActivated + ", role=" + role + ", region=" + region + '}';
     }
+    
+    
 
-    
-    
+
+
+
 
 }

@@ -4,20 +4,59 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      >
     <h:head>
-    </h:head>
-    <h:body>
-        <h:form>        
-            <div style="center">
-                <h:outputLabel for="username" value="Username:" />
-                <p:inputText id="username" value="#{userLoginView.username}" required="true" label="username" />
+        <h:outputStylesheet library = "css" name = "style.css" /> 
 
-                <h:outputLabel for="password" value="Password:" />
-                <p:password id="password" value="#{userLoginView.password}" required="true" label="password" />
-            </div>
+    </h:head>
+    <h:body style="text-align: center;">
+        <h:form  style="display: inline-block;">
+            <h:dataTable value = "#{User.users}" var = "u"
+                         styleClass = "employeeTable"
+                         headerClass = "employeeTableHeader"
+                         rowClasses = "employeeTableOddRow,employeeTableEvenRow">
+
+                <h:column>    				
+                    <f:facet name = "header">Nom d'utilisateur</f:facet>    				
+                        #{u.userName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Nom</f:facet>
+                        #{u.lName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Prénom</f:facet>
+                        #{u.fName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Téléphone</f:facet>
+                        #{u.phone}
+                </h:column>
+
+                <h:column>
+                    <f:facet name = "header">Email</f:facet>
+                        #{u.email}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header">Role</f:facet>
+                        #{u.role}
+                </h:column>
+                <h:column>
+                    <f:facet name = "header"></f:facet>
+                    <h:commandButton value="Supprimer" action="#{User.delete(u)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name = "header"></f:facet>
+                    <h:commandButton value="Modifier" action="#{User.update(u)}"/>
+                </h:column>
+            </h:dataTable>
+            <h:link value="Créer un utilisateur" outcome="create"></h:link>
 
         </h:form>
     </h:body>
 </html>
+
 
